@@ -1,22 +1,35 @@
 <Document>
-# Medical
-This is the department where people go to when they're hurt, it's up to the folks working here to fix them.
+	# Medical
+	This is the department where people go to when they're hurt, it's up to the folks working here to fix them.
 
-Right now, medbay is divided into two different sets of care:
+	Right now, medbay is divided into two different sets of care:
 
-## Medical Treatment
-<Box>
-<GuideEntityEmbed Entity="Brutepack"/>
-<GuideEntityEmbed Entity="Bloodpack"/>
-<GuideEntityEmbed Entity="Ointment"/>
-<GuideEntityEmbed Entity="Gauze"/>
-<GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>
-</Box>
-## Chemical Production
-<Box>
-<GuideEntityEmbed Entity="ChemDispenser"/>
-<GuideEntityEmbed Entity="LargeBeaker"/>
-<GuideEntityEmbed Entity="PillCanister"/>
-<GuideEntityEmbed Entity="chem_master"/>
-</Box>
+	## Medical Treatment
+	<Box>
+		<GuideEntityEmbed Entity="Brutepack"/>
+		<GuideEntityEmbed Entity="Bloodpack"/>
+		<GuideEntityEmbed Entity="Ointment"/>
+		<GuideEntityEmbed Entity="Gauze"/>
+		<GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>
+	</Box>
+
+	## Chemical Production
+	<Box>
+		<GuideEntityEmbed Entity="ChemDispenser"/>
+		<GuideEntityEmbed Entity="LargeBeaker"/>
+		<GuideEntityEmbed Entity="PillCanister"/>
+		<GuideEntityEmbed Entity="chem_master"/>
+	</Box>
+
+	## Body bags and other useful features.
+	Body bags are used to prevent rotting and are also used to move bodies around quickly. It's recommended you use them on people you aren't going to heal any time soon. This is very important if you have, for example, 5 bodies and 2 doctors. 3 of these (or atleast 1) bodies will end up rotting without the use of body bags, simply because there are not enough doctors.
+	Syringes are used to quickly administer medicine without the patient having to metabolise them. With syringes, the effects apply *instantly*. Use syringes for moths, and most importantly, when a person isn't dead, to save up on supplies. Dead people cannot metabolise reagents, and so reagents won't affect dead people.
+
+	<Box>
+		<GuideEntityEmbed Entity="BodyBag_Container"/>
+		<GuideEntityEmbed Entity="Syringe"/>
+	</Box>
+
+	Body bags are commonly found in the morgue, in a body bag box.
+	Important tip: Right click on syringes and set their transfer rate to 15u so you don't have to inject every time.
 </Document>
