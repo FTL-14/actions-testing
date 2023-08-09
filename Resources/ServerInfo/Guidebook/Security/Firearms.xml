@@ -1,0 +1,33 @@
+﻿<Document>
+  ## Lethals
+  Lethals are a way to deal with all these fuck-a-roos. In this guide, you'll be taught how to effectively use lethals.
+
+  ## Gear
+  First things first, the required gear. Usually, you'd want something like a lecter, and a combat knife (which can be found in your boots) as a last resort.
+  <Box>
+    <GuideEntityEmbed Entity="WeaponRifleLecter"/>
+    <GuideEntityEmbed Entity="MagazineRifle"/>
+    <GuideEntityEmbed Entity="CombatKnife"/>
+  </Box>
+  When you inspect these items (specifically the lecter and the mag) you'll notice it has a bullet count. This will be useful later on.
+
+  I've written a couple of rules to aid in fighting.
+  These rules are here to ensure your survival against armed opponents. These rules apply for when both you and your opponent are armed with lethal weapons (specifically guns with any lethal ammo type).
+  1. Always try to find cover. Look at your surroundings. Stay behind walls, firelocks, crates, lockers, dead bodies if possible etc. Even airlocks with AA work, as long as you don't touch them. If there is no cover, try to dodge the bullets. It's pretty easy. Look at where the bullets are coming from and avoid that area.
+  2. Shoot ahead of the opponent while they're moving. That's how you're gonna land most of your shots with ballistic weapons. This may only apply to situations where there is absolutely no cover, or the opponent is running away
+  3. If there is no cover, keep firing while running away. If you're behind cover, don't fight back until they stop firing. You are gonna get yourself shot to death if you run into bullets. When they stop firing, take your chances. Do not wait, fight back, and go back into your cover once they start shooting again.
+  4. Only shoot when they peek to save ammo. Always be aware of your surroundings, and the position of your opponent here.
+  5. If there's any allies already fighting, don't bother to help. It'll get both of you killed. Unless you need to cover them, they're reloading or they're healing (getting healed perhaps), it's best to just let them fight by themselves while you wait for your turn to fire.
+  6. If you're not alone, always talk in your department channel about your status, and location. While you're behind cover, you have all the time to talk. Call in backup whenever possible, unless you can handle the situation by yourself. Of course, you should prioritize doing this if you're also following rule 5, where you have an ally fighting with you.
+  7. If you're out of ammo, run. Never wait, they are eventually gonna come checking for you once you stop fighting back. Follow rule 6 here if possible.
+  8. Do not shoot from the same angle as your allies. You will be shooting eachother in the back.
+  It is up to you to follow these rules, but it is highly recommended (and required if you play security)
+
+  ## Reloading
+  There's a couple of situations where you need to reload. This is where inspecting the mag and the weapon come in useful. Whenever you do any action, you do not require to put the gun in your hand. Simply keep it in your suit storage, pocket or backpack. Never leave your gun on the ground (it will get stolen).
+
+  Inspect the gun with the mag in.
+  1. If the bullet count is 0, put a new full mag in, put the empty mag in your backpack, take the gun and shoot it once anywhere to chamber the bullet.
+  2. If the bullet count is 1, take the mag out. Inspect it again, is the bullet count 1? If yes, put a new full mag in, no need to shoot. If no, then put the mag with the bullet in, shoot it once, and follow step 1.
+  Simply, just shoot once if you inspect the gun with no mag empty.
+</Document>
