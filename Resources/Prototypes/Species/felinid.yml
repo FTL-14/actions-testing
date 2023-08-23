@@ -67,19 +67,6 @@
   id: MobFelinidEars
 
 - type: humanoidBaseSprite
-  id: MobHumanoidEyes
-  baseSprite:
-    sprite: Mobs/Customization/eyes.rsi
-    state: eyes
-
-- type: humanoidBaseSprite
-  id: MobHumanoidAnyMarking
-
-- type: humanoidBaseSprite
-  id: MobHumanoidMarkingMatchSkin
-  markingsMatchSkin: true
-
-- type: humanoidBaseSprite
   id: MobFelinidHead
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi

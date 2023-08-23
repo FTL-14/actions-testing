@@ -8,7 +8,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 namespace Content.Shared.Leap
 {
     [RegisterComponent, NetworkedComponent]
-    public sealed class LeapComponent : Component
+    public sealed partial class LeapComponent : Component
     {
         // Sidebar action string
         [DataField("leapForwardAction", customTypeSerializer: typeof(PrototypeIdSerializer<InstantActionPrototype>))]
@@ -40,7 +40,6 @@ namespace Content.Shared.Leap
         [ViewVariables]
         public TimeSpan CompleteTime = TimeSpan.FromSeconds(0);
 
-        [Serializable, NetSerializable]
-        public sealed class LeapForwardEvent : InstantActionEvent { }
+        public sealed partial class LeapForwardEvent : InstantActionEvent { }
     }
 }

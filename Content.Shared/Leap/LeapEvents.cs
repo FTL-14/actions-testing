@@ -4,4 +4,4 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Leap;
 
 [Serializable, NetSerializable]
-public sealed class LeapFinishEvent : SimpleDoAfterEvent { }
+public sealed partial class LeapFinishEvent : SimpleDoAfterEvent { }

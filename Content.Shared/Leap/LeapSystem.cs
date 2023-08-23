@@ -35,7 +35,7 @@ public sealed class LeapSystem : EntitySystem
     private const int LeapingCollisionGroup = (int) (CollisionGroup.TableLayer | CollisionGroup.LowImpassable);
     private const string LeapingFixtureName = "Leaping";
 
-    private readonly Dictionary<EntityUid, List<Fixture>> _fixtureRemoveQueue = new();
+    private readonly Dictionary<EntityUid, Dictionary<string,Fixture>> _fixtureRemoveQueue = new();
 
     public override void Initialize()
     {
@@ -108,8 +108,8 @@ public sealed class LeapSystem : EntitySystem
                 || (fixture.CollisionMask & LeapingCollisionGroup) == 0)
                 continue;
 
-            leapComp.DisabledFixtureMasks.Add(fixture.ID, fixture.CollisionMask & LeapingCollisionGroup);
-            _physics.SetCollisionMask(uid, fixture, fixture.CollisionMask & ~LeapingCollisionGroup, fixtureComp);
+            leapComp.DisabledFixtureMasks.Add(name, fixture.CollisionMask & LeapingCollisionGroup);
+            _physics.SetCollisionMask(uid, name, fixture, fixture.CollisionMask & ~LeapingCollisionGroup, fixtureComp);
         }
 
         if (!fixtureComp.Fixtures.ContainsKey(LeapingFixtureName)){
@@ -184,7 +184,7 @@ public sealed class LeapSystem : EntitySystem
 
     private void OnLeapCollisionEnd(EntityUid uid, LeapComponent leapComp, ref EndCollideEvent args)
     {
-        if (args.OurFixture.ID != LeapingFixtureName
+        if (args.OurFixtureId != LeapingFixtureName
             || leapComp.Jumping
             || !leapComp.CheckColliding)
             return;
@@ -224,18 +224,18 @@ public sealed class LeapSystem : EntitySystem
                 continue;
             }
 
-            _physics.SetCollisionMask(uid, fixture, fixture.CollisionMask | fixtureMask, fixtures);
+            _physics.SetCollisionMask(uid, name, fixture, fixture.CollisionMask | fixtureMask, fixtures);
         }
         leapComp.DisabledFixtureMasks.Clear();
 
         if (!_fixtureRemoveQueue.TryGetValue(uid, out var removeQueue))
         {
-            removeQueue = new List<Fixture>();
+            removeQueue = new Dictionary<string,Fixture>();
             _fixtureRemoveQueue.Add(uid, removeQueue);
         }
 
         if (fixtures.Fixtures.TryGetValue(LeapingFixtureName, out var leapingFixture))
-            removeQueue.Add(leapingFixture);
+            removeQueue.Add(LeapingFixtureName, leapingFixture);
 
         //if (Resolve(uid, ref climbComp))
         //    climbComp.IsClimbing = false;
@@ -253,7 +253,7 @@ public sealed class LeapSystem : EntitySystem
 
             foreach (var fixture in fixtures)
             {
-                _fixtureSystem.DestroyFixture(uid, fixture, body: physicsComp, manager: fixturesComp);
+                _fixtureSystem.DestroyFixture(uid, fixture.Key, fixture.Value, body: physicsComp, manager: fixturesComp);
             }
         }
 
