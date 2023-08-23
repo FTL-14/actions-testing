@@ -456,3 +456,31 @@
   - type: Appearance
   - type: StaticPrice
     price: 750
+
+- type: entity
+  name: A Light Shining in Darkness
+  parent: BaseWeaponBatterySmall
+  id: WeaponGodGun
+  description: The path of the righteous man is beset on all sides by the inequities of the selfish and the tyranny of evil men.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/godgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/godgun.rsi
+  - type: Gun
+    fireRate: 1.25
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/godgun.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: HolyLaser
+    fireCost: 50
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 300
