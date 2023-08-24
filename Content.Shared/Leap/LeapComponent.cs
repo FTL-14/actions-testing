@@ -22,9 +22,19 @@ namespace Content.Shared.Leap
         [DataField("duration")]
         public float Duration = 1f;
 
+        // Speed entity is set to during leap
         [DataField("speed")]
         public float Speed = 5f;
 
+        // Whether this entity should be able to leap in no gravity environments
+        [DataField("requiresGravity")]
+        public bool RequiresGravity = false; //Magboots do count as having gravity
+
+        // Whether this entity should be able to leap if there is no surface nearby, used if the gravity requirement is false
+        [DataField("requiresGrounded")]
+        public bool RequiresGrounded = true;
+
+        // The stamina that will be used up in a leap
         [DataField("staminaCost")]
         public int StaminaCost = 20;
 
@@ -36,9 +46,6 @@ namespace Content.Shared.Leap
 
         [ViewVariables]
         public bool CheckColliding = false;
-
-        [ViewVariables]
-        public TimeSpan CompleteTime = TimeSpan.FromSeconds(0);
 
         public sealed partial class LeapForwardEvent : InstantActionEvent { }
     }

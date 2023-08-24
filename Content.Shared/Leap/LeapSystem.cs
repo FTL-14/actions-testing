@@ -18,6 +18,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.IdentityManagement;
 using static Content.Shared.Leap.LeapComponent;
+using Content.Shared.Gravity;
 
 namespace Content.Shared.Leap;
 
@@ -31,11 +32,12 @@ public sealed class LeapSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StaminaSystem _staminaSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
 
     private const int LeapingCollisionGroup = (int) (CollisionGroup.TableLayer | CollisionGroup.LowImpassable);
     private const string LeapingFixtureName = "Leaping";
 
-    private readonly Dictionary<EntityUid, Dictionary<string,Fixture>> _fixtureRemoveQueue = new();
+    private readonly Dictionary<EntityUid, Dictionary<string, Fixture>> _fixtureRemoveQueue = new();
 
     public override void Initialize()
     {
@@ -78,8 +80,7 @@ public sealed class LeapSystem : EntitySystem
     private bool AttemptLeap(EntityUid uid,
     LeapComponent? leapComp = null,
     PhysicsComponent? physicsComp = null,
-    FixturesComponent? fixtureComp = null,
-    ClimbingComponent? climbingComp = null)
+    FixturesComponent? fixtureComp = null)
     {
 
         if (!Resolve(uid, ref fixtureComp, ref physicsComp, ref leapComp))
@@ -88,12 +89,11 @@ public sealed class LeapSystem : EntitySystem
         if (leapComp.Jumping == true)
             return false;
 
-        //if (Resolve(uid, ref climbingComp))
-        //{
-        //    if ( climbingComp.IsClimbing == true )
-        //        return false;
-        //    climbingComp.IsClimbing = true;
-        //}
+        if (leapComp.RequiresGravity && _gravity.IsWeightless(uid))
+            return false;
+
+        if (leapComp.RequiresGrounded && !CheckGrounded(uid))
+            return false;
 
         if (!_staminaSystem.TryTakeStamina(uid, leapComp.StaminaCost))
         {
@@ -112,7 +112,8 @@ public sealed class LeapSystem : EntitySystem
             _physics.SetCollisionMask(uid, name, fixture, fixture.CollisionMask & ~LeapingCollisionGroup, fixtureComp);
         }
 
-        if (!fixtureComp.Fixtures.ContainsKey(LeapingFixtureName)){
+        if (!fixtureComp.Fixtures.ContainsKey(LeapingFixtureName))
+        {
             if (!_fixtureSystem.TryCreateFixture(
                     uid,
                     new PhysShapeCircle(0.35f),
@@ -150,6 +151,17 @@ public sealed class LeapSystem : EntitySystem
         return true;
     }
 
+    private bool CheckGrounded(EntityUid uid, TransformComponent? xform = null)
+    {
+        if (!Resolve(uid, ref xform))
+            return false;
+
+        if (xform.GridUid != null)
+            return true;
+
+        return false;
+    }
+
     private void FinishLeap(EntityUid uid, LeapComponent leapComp, LeapFinishEvent args)
     {
         PhysicsComponent? physics = null;
@@ -173,8 +185,6 @@ public sealed class LeapSystem : EntitySystem
 
         foreach (var entities in contactingEntities)
         {
-            //if (fixture == args.OtherFixture)
-            //continue;
             if (HasComp<ClimbableComponent>(entities))
                 return;
         }
@@ -204,15 +214,10 @@ public sealed class LeapSystem : EntitySystem
         leapComp.Jumping = false;
         leapComp.CheckColliding = false;
 
-        //ClimbingComponent? climbingComp = null;
-
-        //if(Resolve(uid, ref climbingComp))
-            //climbingComp.IsClimbing = false;
-
         ReturnLeapCollisions(uid, leapComp);
     }
 
-    private void ReturnLeapCollisions(EntityUid uid, LeapComponent? leapComp = null, FixturesComponent? fixtures = null, ClimbingComponent? climbComp = null)
+    private void ReturnLeapCollisions(EntityUid uid, LeapComponent? leapComp = null, FixturesComponent? fixtures = null)
     {
         if (!Resolve(uid, ref fixtures, ref leapComp))
             return;
@@ -230,15 +235,12 @@ public sealed class LeapSystem : EntitySystem
 
         if (!_fixtureRemoveQueue.TryGetValue(uid, out var removeQueue))
         {
-            removeQueue = new Dictionary<string,Fixture>();
+            removeQueue = new Dictionary<string, Fixture>();
             _fixtureRemoveQueue.Add(uid, removeQueue);
         }
 
         if (fixtures.Fixtures.TryGetValue(LeapingFixtureName, out var leapingFixture))
             removeQueue.Add(LeapingFixtureName, leapingFixture);
-
-        //if (Resolve(uid, ref climbComp))
-        //    climbComp.IsClimbing = false;
     }
 
     public override void Update(float frameTime)
