@@ -10,8 +10,7 @@ jobs:
     if: github.base_ref == 'master'
     
     steps:
-    - name: debug
-      run: echo "$GITHUB_REF"
+    - uses: hmarr/debug-action@v2
     
     - uses: superbrothers/close-pull-request@v3
       with:
