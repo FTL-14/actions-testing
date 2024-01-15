@@ -7,11 +7,11 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: github.ref == 'refs/heads/master'
     
     steps:
     - name: debug
-      run: echo "$GITHUB_REF"
+      run: echo $GITHUB_REF
     
     - uses: superbrothers/close-pull-request@v3
       with:
