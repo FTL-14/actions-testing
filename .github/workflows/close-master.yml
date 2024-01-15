@@ -7,11 +7,9 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'master'
+    if: github.head_ref == 'master'
     
-    steps:
-    - uses: hmarr/debug-action@v2
-    
+    steps:    
     - uses: superbrothers/close-pull-request@v3
       with:
         # Optional. Post a issue comment just before closing a pull request.
