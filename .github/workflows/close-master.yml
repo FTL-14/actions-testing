@@ -7,9 +7,12 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'master'
+    if: ${{ github.ref == 'refs/heads/master' }}
     
     steps:
+    - name: debug
+      run: echo "$GITHUB_REF"
+    
     - uses: superbrothers/close-pull-request@v3
       with:
         # Optional. Post a issue comment just before closing a pull request.
