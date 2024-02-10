@@ -1,10 +1,4 @@
 ﻿Entries:
-- author: metalgearsloth
-  changes:
-  - message: Fix ambient audio not playing.
-    type: Fix
-  id: 5214
-  time: '2023-11-28T03:09:26.0000000+00:00'
 - author: M3739
   changes:
   - message: An entry regarding cyborgs has been added to the guidebook.
@@ -3756,3 +3750,16 @@
   id: 5714
   time: '2024-02-10T18:46:16.0000000+00:00'
   url: null
+- author: VasilisThePikachu
+  changes:
+  - message: Added fun!
+    type: Add
+  - message: Removed fun!
+    type: Remove
+  - message: Changed fun!
+    type: Tweak
+  - message: Fixed fun!
+    type: Fix
+  id: 5715
+  time: '2024-02-10T18:58:51.0000000+00:00'
+  url: https://github.com/FTL-14/actions-testing/pull/11
